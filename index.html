@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video-Search-Engine</title>
+</head>
+<body>
+    <nav>
+        <div id="searchQueryPanel">
+            <img src="website\templates\youtube.jpeg" alt="Logo">
+            <input type="text" id="searchQuery" placeholder="Enter your search query">
+            <button id="searchButton">Search</button>
+        </div>
+    </nav>
+    <div id="panelsContainer">
+        <!-- Current Video Panel -->
+        <h3>Current Video</h3>
+        <div id="currentVideoPanel">
+            <div id="videoDetails"></div>
+        </div>
+
+        <!-- Search Results Panel -->
+        <h3>Search Results</h3>
+        <div id="searchResultsPanel">
+            <ul id="searchResultsList">
+                <!-- Video results will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("searchButton").addEventListener("click", search);
+
+        async function search() {
+            var searchQuery = document.getElementById("searchQuery").value;
+
+            try {
+                // Perform an AJAX request to Flask endpoint
+                const response = await fetch('/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'search_query=' + encodeURIComponent(searchQuery),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                // Update the search results dynamically
+                const data = await response.json();
+                console.log('Fetched Video IDs:', data); // Log retrieved video IDs to the console
+
+                var searchResultsList = document.getElementById('searchResultsList');
+                searchResultsList.innerHTML = ''; // Clear previous results
+
+                data.forEach(video => {
+                    var listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <img src="${video.thumbnail}" alt="${video.title} Thumbnail">
+                        <h4>${video.title}</h4>
+                        <p>${video.description}</p>
+                    `;
+                    searchResultsList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
