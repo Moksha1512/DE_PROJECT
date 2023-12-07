@@ -1,0 +1,60 @@
+
+  .btn {
+    border: none;
+    color:#fff;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap:6px;
+    background-color: #bdc0c5;
+    border-radius: 4px;
+    padding: 6px 15px;
+    margin: 0 10px;
+  }
+   
+  .like-active {
+    background-color: #FF0063;
+  }
+   
+  .dislike-active {
+    background-color: #394350;
+  }
+  .px24{
+    font-size: 24px;
+  }
+  .px20{
+    font-size: 20px;
+  }
+  .px16{
+    font-size: 16px;
+  }
+  .px12{
+    font-size: 12px;
+  }
+  .px8{
+    font-size: 8px;
+  }
+  .px4px{
+    font-size: 4px;
+  }
+  .px14{
+    font-size: 14px;
+  }
+  .blue{
+    color: rgb(8, 11, 216);
+    line-height:'4px';
+    cursor:'pointer';
+    font-style: italic;
+  }
+  .grey{
+    color: rgba(47, 47, 47, 0.622);
+  }
+  .px10{
+    font-size: 10px;
+  }
+  .smallLH{
+    line-height: 8px;
+  }
+  .mediumLH{
+    line-height: 14px;
+  }
